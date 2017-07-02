@@ -46,4 +46,4 @@
     
 
 # 效果图
-![image](https://github.com/ITIosEthan/CZYWaveTableView/blob/master/czyWaveGif.gif)
+![image](https://github.com/ITIosEthan/CzyWaveTableViewDemo/blob/master/czyWaveGif.gif)
