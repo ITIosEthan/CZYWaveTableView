@@ -1,0 +1,31 @@
+
+//
+//  CzyPrefixHeader.pch
+//  CZYWaveTableView
+//
+//  Created by macOfEthan on 16/12/20.
+//  Copyright © 2016年 macOfEthan. All rights reserved.
+//
+
+#ifndef CzyPrefixHeader_pch
+#define CzyPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define kCzyFullWidth [UIScreen mainScreen].bounds.size.width
+#define kCzyFullHeight [UIScreen mainScreen].bounds.size.height
+
+#define kCzyWhiteColor [UIColor whiteColor]
+#define kCzyClearColor [UIColor clearColor]
+#define kCzyBlackColor [UIColor blackColor]
+#define kCzyBrownColor [UIColor brownColor]
+
+#define kCzyFont(czyFont) [UIFont systemFontOfSize:czyFont]
+
+#import "ViewController.h"
+#import "CzyWaveView.h"
+
+
+
+#endif /* CzyPrefixHeader_pch */
