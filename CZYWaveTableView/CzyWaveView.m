@@ -49,21 +49,18 @@
         //初始化
         self.firstWavesLayer = [CAShapeLayer layer];
         //设置闭环的颜色
-        self.firstWavesLayer.fillColor = self.firstWavesColor.CGColor;
+        self.firstWavesLayer.fillColor = kCzyBrownColor.CGColor;
         //设置边缘线的颜色
         self.firstWavesLayer.strokeColor = kCzyBrownColor.CGColor;
         //设置边缘线的宽度
         self.firstWavesLayer.lineWidth = 1.0;
         self.firstWavesLayer.strokeStart = 0.0;
-        self.firstWavesLayer.strokeEnd = 0.8;
-        
+        self.firstWavesLayer.strokeEnd = 1.0;
         [self.layer addSublayer:self.firstWavesLayer];
     }
     
     //设置波浪的宽度
     WavesWidth = self.frame.size.width;
-    //波浪颜色
-    self.firstWavesColor = kCzyBrownColor;
     //设置波浪流动速度
     wavesSpeed = 0.05;
     //设置振幅
