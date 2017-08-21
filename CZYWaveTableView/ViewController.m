@@ -93,7 +93,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedId];
     }
     
-    cell.textLabel.text = @"abby ethan together forever!";
+    cell.textLabel.text = @"wave";
     cell.textLabel.textColor = kCzyBrownColor;
     
     return cell;
