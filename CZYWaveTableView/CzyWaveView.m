@@ -6,15 +6,17 @@
 //  Copyright © 2016年 macOfEthan. All rights reserved.
 //
 
+#define USE_CONTEXT //使用context
+
 #import "CzyWaveView.h"
 
 @interface CzyWaveView ()
 {
-    CGFloat waveA;//水纹振幅
-    CGFloat waveW ;//水纹周期
+    CGFloat waveA; //水纹振幅
+    CGFloat waveW; //水纹周期
     CGFloat offsetX; //位移
     CGFloat currentK; //当前波浪高度Y
-    CGFloat wavesSpeed;//水纹速度
+    CGFloat wavesSpeed; //水纹速度
     CGFloat WavesWidth; //水纹宽度
 }
 
@@ -28,6 +30,7 @@
 
 @implementation CzyWaveView
 
+
 #pragma mark - 生命周期
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -37,19 +40,9 @@
     return self;
 }
 
-
 #pragma mark - 创建波浪
 - (void)czyInitWave
 {
-    //设置波浪的宽度
-    WavesWidth = self.frame.size.width;
-    
-    //波浪颜色
-    self.firstWavesColor = kCzyBrownColor;
-    
-    //设置波浪的速度
-    wavesSpeed = 1/M_PI;
-    
     //初始化layer
     if (self.firstWavesLayer == nil) {
         
@@ -67,14 +60,16 @@
         [self.layer addSublayer:self.firstWavesLayer];
     }
     
-    
+    //设置波浪的宽度
+    WavesWidth = self.frame.size.width;
+    //波浪颜色
+    self.firstWavesColor = kCzyBrownColor;
     //设置波浪流动速度
-    wavesSpeed = 0.02;
+    wavesSpeed = 0.05;
     //设置振幅
     waveA = 12;
     //设置周期
     waveW = 0.5/30.0;
-    
     //设置波浪纵向位置
     currentK = self.frame.size.height/2;//屏幕居中
     
@@ -95,6 +90,7 @@
 
 -(void)setCurrentFirstWaveLayerPath{
     
+#ifndef USE_CONTEXT
     //创建一个路径
     CGMutablePathRef path = CGPathCreateMutable();
     
@@ -120,8 +116,32 @@
     //使用layer 而没用CurrentContext
     CGPathRelease(path);
     
-}
+#else
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    CGFloat y = currentK;
+    
+    [path moveToPoint:CGPointMake(0, y)];
+    
+    for (NSInteger i=0; i<WavesWidth; i++) {
+        
+        y = waveA * sin(waveW * i + offsetX) + currentK;
+        
+        [path addLineToPoint:CGPointMake(i, y)];
+    }
+    
+    [path addLineToPoint:CGPointMake(WavesWidth, 0)];
+    [path addLineToPoint:CGPointZero];
+    [path closePath];
+    
+    self.firstWavesLayer.path = path.CGPath;
+    
+    [path removeAllPoints];
 
+#endif
+    
+}
 
 -(void)dealloc
 {
